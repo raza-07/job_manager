@@ -2,7 +2,11 @@
 
 A professional dashboard designed to help freelancers manage multiple Upwork accounts, track job proposals, and monitor client replies efficiently. This full-stack application features a **Next.js** frontend and a **NestJS** backend with **MySQL** database.
 
-![Upwork Job Manager](public/login-preview.png)
+### Login Screen
+![Login Screen](public/login-preview.png)
+
+### Dashboard Screen
+![Dashboard Screen](public/dashboard-preview.png)
 
 ## 🚀 Key Features
 
