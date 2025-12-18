@@ -19,6 +19,7 @@ import { Mail, Trash2, CheckCircle2, Clock, Briefcase } from "lucide-react"
 export default function AccountSelector() {
   const dispatch = useAppDispatch()
   const { items: accounts = [], selectedId: selectedAccountId } = useAppSelector((state) => state.accounts ?? { items: [] })
+  const { items: jobs = [] } = useAppSelector((state) => state.jobs ?? { items: [] })
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null)
 
@@ -35,9 +36,9 @@ export default function AccountSelector() {
   }
 
   const selectedAccount = accounts.find((acc) => acc.id === selectedAccountId)
-  const selectedJobs = Array.isArray(selectedAccount?.jobs) ? selectedAccount!.jobs : []
-  const jobsWithReplies = selectedJobs.filter((job) => job.hasReply)
-  const totalJobs = selectedJobs.length
+  // Use jobs from the jobs slice which is the source of truth for the selected account
+  const jobsWithReplies = jobs.filter((job) => job.hasReply)
+  const totalJobs = jobs.length
   const pendingDeleteAccount = accounts.find((acc) => acc.id === pendingDeleteId)
   const hasAccounts = accounts.length > 0
   const currentAccountLabel = selectedAccount

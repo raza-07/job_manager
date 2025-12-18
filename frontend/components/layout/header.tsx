@@ -35,8 +35,8 @@ export default function Header({ onCreateAccount, onCreateJob }: HeaderProps) {
           <div className="flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow-sm">
-                <Briefcase className="w-5 h-5 text-primary-foreground" />
+              <div className="relative w-14 h-14">
+                 <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <div className="flex flex-col">
                 <h1 className="text-lg font-bold text-foreground">Upwork Manager</h1>
@@ -48,13 +48,6 @@ export default function Header({ onCreateAccount, onCreateJob }: HeaderProps) {
             <div className="flex items-center gap-2">
               {/* Primary Actions Group */}
               <div className="flex items-center gap-2 mr-2">
-                <button
-                  onClick={onCreateAccount}
-                  className="inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span className="hidden sm:inline">New Account</span>
-                </button>
                 {accounts.length > 0 && (
                   <button
                     onClick={onCreateJob}
@@ -64,6 +57,13 @@ export default function Header({ onCreateAccount, onCreateJob }: HeaderProps) {
                     <span className="hidden sm:inline">New Job</span>
                   </button>
                 )}
+                <button
+                  onClick={onCreateAccount}
+                  className="inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span className="hidden sm:inline">New Account</span>
+                </button>
               </div>
 
               {/* Divider */}

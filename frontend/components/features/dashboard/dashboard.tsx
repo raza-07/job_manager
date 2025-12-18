@@ -66,9 +66,11 @@ export default function Dashboard() {
   const dispatch = useAppDispatch()
   const { user, isLoading: authLoading, isInitialized } = useAppSelector((state) => state.auth)
   const { items: jobs = [], isLoading: jobsLoading } = useAppSelector((state) => state.jobs ?? { items: [], isLoading: false })
-  const { selectedId: selectedAccountId, isLoading: accountsLoading } = useAppSelector((state) => state.accounts)
+  const { items: accounts = [], selectedId: selectedAccountId, isLoading: accountsLoading } = useAppSelector((state) => state.accounts)
   const userId = user?.id
-  const isLoading = authLoading || jobsLoading || accountsLoading
+  
+  // Initial Loading State: Only show full skeleton on first load or when critical auth/account data is missing
+  const isInitialLoading = !isInitialized || authLoading || (accountsLoading && accounts.length === 0);
 
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("replies")
@@ -99,10 +101,10 @@ export default function Dashboard() {
   }, [isInitialized, authLoading, userId, router])
 
   if (!isInitialized) {
-      return null // Or a minimal full-page loader if preferred, but null prevents flash
+      return null 
   }
 
-  if (isLoading) {
+  if (isInitialLoading) {
     return <DashboardSkeleton />
   }
 
@@ -145,10 +147,19 @@ export default function Dashboard() {
               </button>
             </div>
 
-            {activeTab === "replies" ? (
-              <JobsWithReplies jobs={jobsWithReplies} onJobSaved={handleJobSaved} />
+            {/* Content Area with localized loading state */}
+            {jobsLoading ? (
+               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {[1, 2, 3].map((i) => (
+                      <Skeleton key={i} className="h-[200px] rounded-xl bg-card/50" />
+                  ))}
+               </div>
             ) : (
-              <AllJobsView jobs={jobs} onJobSaved={handleJobSaved} />
+                activeTab === "replies" ? (
+                  <JobsWithReplies jobs={jobsWithReplies} onJobSaved={handleJobSaved} />
+                ) : (
+                  <AllJobsView jobs={jobs} onJobSaved={handleJobSaved} />
+                )
             )}
           </div>
         </div>

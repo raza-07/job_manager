@@ -84,3 +84,6 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   )
 }
 
+
+
+

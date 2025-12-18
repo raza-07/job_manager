@@ -241,8 +241,8 @@ export default function LoginScreen({ defaultTab = "login", defaultView = "auth"
     <div className="flex items-center justify-center min-h-screen bg-background p-4">
       <Card className="w-full max-w-md shadow-lg border-2">
         <CardHeader className="text-center">
-          <div className="mx-auto bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-            <Briefcase className="w-8 h-8 text-primary" />
+          <div className="mx-auto w-32 h-32 flex items-center justify-center mb-4">
+            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl font-bold">Job Manager</CardTitle>
           <CardDescription>Login or create an account to continue.</CardDescription>
